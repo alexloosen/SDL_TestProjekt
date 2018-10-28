@@ -1,4 +1,14 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "Map.h"
+#include "Components.h"
+
+Map* map;
+
+SDL_Renderer* Game::renderer = nullptr;
+
+Manager manager;
+auto& player(manager.addEntity());
 
 Game::Game()
 {
@@ -37,6 +47,10 @@ void Game::init(const char * title, int x, int y, int width, int height, bool fu
 	{
 		isRunning = false;
 	}
+	map = new Map();
+
+	player.addComponent<TransformComponent>(0,0);
+	player.addComponent<SpriteComponent>("..\\Ressources\\img\\test.png");
 }
 
 void Game::handleEvents()
@@ -55,14 +69,21 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	cnt++;
-	std::cout << cnt << std::endl;
+	manager.refresh();
+	manager.update();
+	if (player.getComponent<TransformComponent>().getX() > 100)
+	{
+		player.getComponent<SpriteComponent>().setTexture("..\\Ressources\\img\\playerSpriteSet.png");
+	}
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
 	// add stuff to render
+	map->drawMap();
+
+	manager.draw();
 	SDL_RenderPresent(renderer);
 }
 

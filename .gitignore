@@ -1,0 +1,10 @@
+*.sln
+*.suo
+SDL_TestProjekt/.vs/
+SDL_TestProjekt/Debug/
+SDL_TestProjekt/SDL/
+*.vcxproj*
+SDL_TestProjekt/SDL_TestProjekt/Debug/
+SDL_TestProjekt/SDL_TestProjekt/x64/
+SDL_TestProjekt/x64/Debug/
+SDL_TestProjekt/SDL_TestProjekt/SDL2.dll

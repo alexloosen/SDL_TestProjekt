@@ -41,6 +41,7 @@ Map::Map()
 
 Map::~Map()
 {
+	SDL_DestroyTexture(texture);
 }
 
 void Map::loadMap(int arr[20][25])

@@ -2,10 +2,12 @@
 #include "TextureManager.h"
 #include "Map.h"
 #include "Components.h"
+#include "Vector2D.h"
 
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
 Manager manager;
 auto& player(manager.addEntity());
@@ -51,11 +53,11 @@ void Game::init(const char * title, int x, int y, int width, int height, bool fu
 
 	player.addComponent<TransformComponent>(0,0);
 	player.addComponent<SpriteComponent>("..\\Ressources\\img\\test.png");
+	player.addComponent<KeyboardController>();
 }
 
 void Game::handleEvents()
 {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
 	{
@@ -71,10 +73,7 @@ void Game::update()
 {
 	manager.refresh();
 	manager.update();
-	if (player.getComponent<TransformComponent>().getX() > 100)
-	{
-		player.getComponent<SpriteComponent>().setTexture("..\\Ressources\\img\\playerSpriteSet.png");
-	}
+
 }
 
 void Game::render()
